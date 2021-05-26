@@ -34,10 +34,8 @@ func move(direction):
 	if !$RayCast2D.is_colliding():
 		$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.5, Tween.TRANS_LINEAR)
 		$Tween.start()
-	#	position += direction * tile_size
 	else:
 		var objectHit = $RayCast2D.get_collider()
-		print(objectHit.name)
 		if(objectHit.has_method("pushback")):
 			if(objectHit.pushback(direction)):
 				$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.5, Tween.TRANS_LINEAR)
