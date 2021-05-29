@@ -4,6 +4,9 @@ extends Area2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+signal moveDone(pos)
+var lastDirection
+
 var tile_size = 32
 var inputs = {"right": Vector2.RIGHT,
 			"left": Vector2.LEFT,
@@ -29,6 +32,7 @@ func _input(event):
 #func _process(delta):
 #	pass
 func move(direction):
+	lastDirection = direction
 	$RayCast2D.cast_to = direction * tile_size
 	$RayCast2D.force_raycast_update()
 	if !$RayCast2D.is_colliding():
@@ -41,13 +45,18 @@ func move(direction):
 				$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.5, Tween.TRANS_LINEAR)
 				$Tween.start()
 
+func keepControl():
+	if Input.is_action_pressed("ui_right"):
+		move(inputs["right"])
+	elif Input.is_action_pressed("ui_left"):
+		move(inputs["left"])
+	elif Input.is_action_pressed("ui_up"):
+		move(inputs["up"])
+	elif Input.is_action_pressed("ui_down"):
+		move(inputs["down"])
+	
+func slide():
+	move(lastDirection)
 
 func _on_Tween_tween_completed(object, key):
-		if Input.is_action_pressed("ui_right"):
-			move(inputs["right"])
-		elif Input.is_action_pressed("ui_left"):
-			move(inputs["left"])
-		elif Input.is_action_pressed("ui_up"):
-			move(inputs["up"])
-		elif Input.is_action_pressed("ui_down"):
-			move(inputs["down"])
+		emit_signal("moveDone", position)
