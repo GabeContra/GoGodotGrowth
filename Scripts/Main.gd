@@ -18,7 +18,7 @@ func _ready():
 
 func _on_Player_moveDone(pos):
 	var tileIndex = $TileMap.get_cellv($TileMap.world_to_map(pos))
-	if tileIndex == 2:
+	if tileIndex == 0:
 		$TileMap/Player.slide()
 	else:
 		$TileMap/Player.keepControl()

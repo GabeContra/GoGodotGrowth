@@ -36,13 +36,13 @@ func move(direction):
 	$RayCast2D.cast_to = direction * tile_size
 	$RayCast2D.force_raycast_update()
 	if !$RayCast2D.is_colliding():
-		$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.5, Tween.TRANS_LINEAR)
+		$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.4, Tween.TRANS_LINEAR)
 		$Tween.start()
 	else:
 		var objectHit = $RayCast2D.get_collider()
 		if(objectHit.has_method("pushback")):
 			if(objectHit.pushback(direction)):
-				$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.5, Tween.TRANS_LINEAR)
+				$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.4, Tween.TRANS_LINEAR)
 				$Tween.start()
 
 func keepControl():
