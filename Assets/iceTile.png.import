@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stone.png-083619ed9cb60da6213c6ca04d200509.stex"
+path="res://.import/iceTile.png-7c8833859203578e18da959876093c5d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://stone.png"
-dest_files=[ "res://.import/stone.png-083619ed9cb60da6213c6ca04d200509.stex" ]
+source_file="res://Assets/iceTile.png"
+dest_files=[ "res://.import/iceTile.png-7c8833859203578e18da959876093c5d.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
