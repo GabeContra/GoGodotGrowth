@@ -56,10 +56,14 @@ func move(direction):
 			if(objectHit.pushback(direction, true)):
 				$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.4, Tween.TRANS_LINEAR)
 				$Tween.start()
+				$Sprite.frame = 1 + int(leftFootForward)
+				print(leftFootForward)
+				if (!sliding):
+					leftFootForward = !leftFootForward
 		sliding = false
-		if (!sliding):
-			$Sprite.frame = 0
-	
+		if!(objectHit.has_method("pushback")):
+			if (!sliding):
+				$Sprite.frame = 0
 
 func keepControl():
 	sliding = false

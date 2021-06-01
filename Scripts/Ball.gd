@@ -5,6 +5,7 @@ class_name Ball
 
 signal moving(obj, pos, dir)
 signal moveDone(obj, pos)
+signal tooHeavy()
 
 var lastDirection
 var tile_size = 32
@@ -18,6 +19,7 @@ func _ready():
 func pushback(direction, pushed):
 	lastDirection = direction
 	if scaleLevel == 12:
+		emit_signal("tooHeavy")
 		return false
 	$RayCast2D.cast_to = direction * tile_size
 	$RayCast2D.force_raycast_update()
