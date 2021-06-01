@@ -47,7 +47,6 @@ func move(direction):
 		if (!sliding):
 			leftFootForward = !leftFootForward
 	else:
-		print("hit something")
 		var objectHit = $RayCast2D.get_collider()
 		if(objectHit.has_method("pushback")):
 			if sliding:
@@ -62,7 +61,6 @@ func move(direction):
 	
 
 func keepControl():
-	print("keeping")
 	sliding = false
 	if Input.is_action_pressed("ui_right"):
 		move(inputs["right"])

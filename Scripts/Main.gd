@@ -24,22 +24,21 @@ func _on_Player_moveDone(pos):
 	else:
 		$Floor/Objects/Player.keepControl()
 		return
-	print("headadd")
 
 
-func _on_Ball_moving(pos, dir):
+func _on_Ball_moving(obj, pos, dir):
 	var currentPos = $Floor.world_to_map(pos)
 	var tileIndex = $Floor.get_cellv(currentPos)
 	var nextTileIndex = $Floor.get_cellv(currentPos + dir)
 	if tileIndex == 1 and nextTileIndex == 1:
-		$Floor/Objects/Ball.scaleLevel += 1
+		obj.scaleLevel += 1
 		
 
 
-func _on_Ball_moveDone(pos):
+func _on_Ball_moveDone(obj, pos):
 	var tileIndex = $Floor.get_cellv($Floor.world_to_map(pos))
 	if tileIndex == 0:
-		$Floor/Objects/Ball.slide()
+		obj.slide()
 
 
 func _on_Player_moving(pos, dir):
