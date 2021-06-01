@@ -40,6 +40,7 @@ func move(direction):
 		$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.4, Tween.TRANS_LINEAR)
 		$Tween.start()
 	else:
+		print("hit something")
 		var objectHit = $RayCast2D.get_collider()
 		if(objectHit.has_method("pushback")):
 			if sliding:
@@ -48,8 +49,10 @@ func move(direction):
 			if(objectHit.pushback(direction)):
 				$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.4, Tween.TRANS_LINEAR)
 				$Tween.start()
+	
 
 func keepControl():
+	print("keeping")
 	sliding = false
 	if Input.is_action_pressed("ui_right"):
 		move(inputs["right"])

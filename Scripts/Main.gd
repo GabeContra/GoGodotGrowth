@@ -17,23 +17,26 @@ func _ready():
 
 
 func _on_Player_moveDone(pos):
-	var tileIndex = $TileMap.get_cellv($TileMap.world_to_map(pos))
+	var tileIndex = $Floor.get_cellv($Floor.world_to_map(pos))
 	if tileIndex == 0:
-		$TileMap/Player.slide()
+		$Floor/Objects/Player.slide()
+		return
 	else:
-		$TileMap/Player.keepControl()
+		$Floor/Objects/Player.keepControl()
+		return
+	print("headadd")
 
 
 func _on_Ball_moving(pos, dir):
-	var currentPos = $TileMap.world_to_map(pos)
-	var tileIndex = $TileMap.get_cellv(currentPos)
-	var nextTileIndex = $TileMap.get_cellv(currentPos + dir)
+	var currentPos = $Floor.world_to_map(pos)
+	var tileIndex = $Floor.get_cellv(currentPos)
+	var nextTileIndex = $Floor.get_cellv(currentPos + dir)
 	if tileIndex == 1 and nextTileIndex == 1:
-		$Ball.scaleLevel += 1
+		$Floor/Objects/Ball.scaleLevel += 1
 		
 
 
 func _on_Ball_moveDone(pos):
-	var tileIndex = $TileMap.get_cellv($TileMap.world_to_map(pos))
+	var tileIndex = $Floor.get_cellv($Floor.world_to_map(pos))
 	if tileIndex == 0:
-		$Ball.slide()
+		$Floor/Objects/Ball.slide()
