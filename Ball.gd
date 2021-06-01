@@ -1,3 +1,4 @@
+tool
 extends Area2D
 
 
@@ -6,9 +7,12 @@ extends Area2D
 # var b = "text"
 var tile_size = 32
 
+export(int) var scaleLevel = 1 setget setScale, getScale
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	scaleLevel = scaleLevel
+	#pass # Replace with function body.
 
 func pushback(direction):
 	$RayCast2D.cast_to = direction * tile_size
@@ -21,3 +25,10 @@ func pushback(direction):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func getScale():
+	return scaleLevel
+	
+func setScale(scale):
+	scaleLevel = scale
+	$Sprite.scale = Vector2(0.2+0.1*scaleLevel,0.2+0.1*scaleLevel)
