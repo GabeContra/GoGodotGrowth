@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/stone.png" type="Texture" id=1]
+[ext_resource path="res://Assets/snowball.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Ball.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15.9484, 15.4903 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 15.7486
 
 [node name="Ball" type="Area2D"]
 collision_layer = 2
@@ -13,6 +13,7 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 1 )
+offset = Vector2( 0, -2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
