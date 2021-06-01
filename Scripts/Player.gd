@@ -6,6 +6,7 @@ extends Area2D
 # var b = "text"
 signal moveDone(pos)
 var lastDirection
+var sliding = false
 
 var tile_size = 32
 var inputs = {"right": Vector2.RIGHT,
@@ -41,11 +42,15 @@ func move(direction):
 	else:
 		var objectHit = $RayCast2D.get_collider()
 		if(objectHit.has_method("pushback")):
+			if sliding:
+				sliding = false
+				return
 			if(objectHit.pushback(direction)):
 				$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.5, Tween.TRANS_LINEAR)
 				$Tween.start()
 
 func keepControl():
+	sliding = false
 	if Input.is_action_pressed("ui_right"):
 		move(inputs["right"])
 	elif Input.is_action_pressed("ui_left"):
@@ -56,6 +61,7 @@ func keepControl():
 		move(inputs["down"])
 	
 func slide():
+	sliding = true
 	move(lastDirection)
 
 func _on_Tween_tween_completed(object, key):

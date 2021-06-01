@@ -20,5 +20,7 @@ position = Vector2( 400, 336 )
 
 [node name="Ball" parent="." instance=ExtResource( 4 )]
 position = Vector2( 304, 336 )
-scaleLevel = 11
+
 [connection signal="moveDone" from="TileMap/Player" to="." method="_on_Player_moveDone"]
+[connection signal="moveDone" from="Ball" to="." method="_on_Ball_moveDone"]
+[connection signal="moving" from="Ball" to="." method="_on_Ball_moving"]

@@ -10,14 +10,13 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
 
 config/name="Growth"
 run/main_scene="res://Main.tscn"
-config/icon="res://Assets/icon.png"
+config/icon="res://icon.png"
 
 [display]
 
