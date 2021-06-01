@@ -26,7 +26,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Growth"
+config/name="Rolling Snow"
 run/main_scene="res://Main.tscn"
 config/icon="res://Assets/snowball.png"
 
