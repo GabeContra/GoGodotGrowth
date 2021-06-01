@@ -51,8 +51,9 @@ func move(direction):
 		if(objectHit.has_method("pushback")):
 			if sliding:
 				sliding = false
+				$Sprite.frame = 0
 				return
-			if(objectHit.pushback(direction)):
+			if(objectHit.pushback(direction, true)):
 				$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.4, Tween.TRANS_LINEAR)
 				$Tween.start()
 		sliding = false

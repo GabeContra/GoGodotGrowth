@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/iceTile.tres" type="TileSet" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Ball.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Goal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=6]
-[ext_resource path="res://Level2.tscn" type="PackedScene" id=7]
 
 [node name="Main" type="Node"]
 script = ExtResource( 6 )
@@ -28,7 +27,7 @@ format = 1
 tile_data = PoolIntArray( 327689, 0, 0, 327690, 2, 0, 327693, 1, 0, 327694, 2, 0, 327697, 4, 0, 327698, 4, 0, 393225, 0, 65536, 393228, 0, 196609, 393229, 0, 196611, 393232, 1, 0, 393233, 2, 0, 393235, 4, 0, 458759, 2, 0, 458761, 0, 131072, 458762, 4, 0, 458763, 1, 0, 458764, 2, 0, 458766, 1, 0, 458768, 4, 0, 458771, 0, 196609, 458772, 0, 196610, 458773, 0, 196611, 458776, 0, 0, 524297, 2, 0, 524299, 0, 0, 524305, 4, 0, 524306, 2, 0, 524308, 1, 0, 524310, 0, 0, 524312, 0, 65536, 589830, 0, 196609, 589831, 0, 196611, 589832, 1, 0, 589835, 0, 65536, 589841, 0, 0, 589844, 2, 0, 589846, 0, 131072, 589848, 0, 65536, 655364, 2, 0, 655366, 4, 0, 655367, 2, 0, 655371, 0, 65536, 655377, 0, 65536, 655378, 4, 0, 655379, 1, 0, 655384, 0, 65536, 720902, 1, 0, 720907, 0, 131072, 720909, 0, 196609, 720910, 0, 196611, 720913, 0, 131072, 720914, 1, 0, 720915, 0, 196609, 720916, 0, 196610, 720917, 0, 196611, 720918, 4, 0, 720920, 0, 65536, 786438, 1, 0, 786439, 2, 0, 786451, 1, 0, 786452, 2, 0, 786454, 1, 0, 786456, 0, 131072, 851973, 2, 0, 851985, 4, 0, 851986, 4, 0, 851987, 4, 0, 917511, 1, 0, 917512, 4, 0, 917513, 1, 0, 917514, 1, 0, 917521, 2, 0, 917523, 1, 0, 917524, 4, 0, 917525, 1, 0, 917526, 0, 0, 983046, 2, 0, 983048, 1, 0, 983049, 2, 0, 983059, 4, 0, 983060, 0, 0, 983062, 0, 65536, 1048584, 4, 0, 1048591, 2, 0, 1048593, 2, 0, 1048595, 1, 0, 1048596, 0, 131072, 1048598, 0, 131072, 1114120, 2, 0, 1114122, 1, 0, 1114123, 2, 0, 1114125, 2, 0, 1114131, 4, 0, 1179658, 4, 0, 1179663, 1, 0, 1179664, 4, 0, 1179666, 0, 0, 1179668, 0, 196609, 1179669, 0, 196610, 1179670, 0, 196611, 1245192, 0, 196609, 1245193, 0, 196611, 1245194, 2, 0, 1245196, 1, 0, 1245197, 1, 0, 1245198, 0, 196609, 1245199, 0, 196610, 1245200, 0, 196611, 1245202, 0, 65536, 1310732, 0, 196609, 1310733, 0, 196611, 1310738, 0, 131072 )
 
 [node name="Player" parent="Floor/Objects" instance=ExtResource( 2 )]
-position = Vector2( 400, 336 )
+position = Vector2( 432, 304 )
 
 [node name="Ball" parent="Floor/Objects" instance=ExtResource( 4 )]
 position = Vector2( 560, 400 )
@@ -37,11 +36,10 @@ scaleLevel = 4
 
 [node name="Goal" parent="Floor/Objects" instance=ExtResource( 5 )]
 position = Vector2( 576, 383.6 )
-numOfBalls = 2
-NextLevel = ExtResource( 7 )
+NextLevel = null
 
 [node name="Ball2" parent="Floor/Objects" instance=ExtResource( 4 )]
-position = Vector2( 368, 400 )
+position = Vector2( 336, 368 )
 scaleLevel = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -59,17 +57,12 @@ text = "Reset"
 [node name="WinPopop" type="AcceptDialog" parent="."]
 margin_right = 240.0
 margin_bottom = 144.0
+rect_clip_content = true
 popup_exclusive = true
 window_title = "You Won"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="LossPopup" type="AcceptDialog" parent="."]
-margin_right = 83.0
-margin_bottom = 58.0
-popup_exclusive = true
-window_title = "Level Lost"
 
 [connection signal="moveDone" from="Floor/Objects/Player" to="." method="_on_Player_moveDone"]
 [connection signal="moving" from="Floor/Objects/Player" to="." method="_on_Player_moving"]
@@ -81,4 +74,3 @@ window_title = "Level Lost"
 [connection signal="moving" from="Floor/Objects/Ball2" to="." method="_on_Ball_moving"]
 [connection signal="pressed" from="MarginContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="confirmed" from="WinPopop" to="." method="_on_WinPopop_confirmed"]
-[connection signal="confirmed" from="LossPopup" to="." method="_on_LossPopup_confirmed"]

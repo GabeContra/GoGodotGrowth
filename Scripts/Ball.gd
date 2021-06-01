@@ -15,7 +15,7 @@ export(int) var scaleLevel = 1 setget setScale, getScale
 func _ready():
 	pass
 
-func pushback(direction):
+func pushback(direction, pushed):
 	lastDirection = direction
 	if scaleLevel == 12:
 		return false
@@ -27,8 +27,9 @@ func pushback(direction):
 		$Tween.start()
 		return true
 	else:
-		if $RayCast2D.get_collider() is Goal:
-			print("that's a goal")
+		var obj = $RayCast2D.get_collider()
+		if obj is Goal and pushed:
+			obj.addBall(self)
 	return false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,7 +37,7 @@ func pushback(direction):
 #	pass
 
 func slide():
-	pushback(lastDirection)
+	pushback(lastDirection, false)
 
 func getScale():
 	return scaleLevel

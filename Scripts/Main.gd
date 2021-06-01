@@ -4,7 +4,7 @@ extends Node
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+var nextLevel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,3 +49,24 @@ func _on_Player_moving(pos, dir):
 		$Floor/Objects/Player.sliding = true
 	if nextTileIndex == 1:
 		$Floor/Objects/Player.sliding = false
+
+
+func _on_Goal_failed():
+	$LossPopup.popup_centered()
+
+
+func _on_Button_pressed():
+	get_tree().reload_current_scene()
+
+
+func _on_Goal_wonLevel(next):
+	nextLevel = next
+	$WinPopop.popup_centered()
+
+
+func _on_WinPopop_confirmed():
+	get_tree().change_scene_to(nextLevel)
+
+
+func _on_LossPopup_confirmed():
+	get_tree().reload_current_scene()
