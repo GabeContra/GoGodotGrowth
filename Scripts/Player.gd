@@ -5,8 +5,10 @@ extends Area2D
 # var a = 2
 # var b = "text"
 signal moveDone(pos)
+signal moving(pos, dir)
 var lastDirection
 var sliding = false
+var leftFootForward = true
 
 var tile_size = 32
 var inputs = {"right": Vector2.RIGHT,
@@ -36,9 +38,14 @@ func move(direction):
 	lastDirection = direction
 	$RayCast2D.cast_to = direction * tile_size
 	$RayCast2D.force_raycast_update()
+	updateAnimDirection()
 	if !$RayCast2D.is_colliding():
+		emit_signal("moving", position, direction)
 		$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.4, Tween.TRANS_LINEAR)
 		$Tween.start()
+		$Sprite.frame = 1 + int(leftFootForward)
+		if (!sliding):
+			leftFootForward = !leftFootForward
 	else:
 		print("hit something")
 		var objectHit = $RayCast2D.get_collider()
@@ -49,6 +56,9 @@ func move(direction):
 			if(objectHit.pushback(direction)):
 				$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.4, Tween.TRANS_LINEAR)
 				$Tween.start()
+		sliding = false
+		if (!sliding):
+			$Sprite.frame = 0
 	
 
 func keepControl():
@@ -62,10 +72,28 @@ func keepControl():
 		move(inputs["up"])
 	elif Input.is_action_pressed("ui_down"):
 		move(inputs["down"])
-	
+
+func updateAnimDirection():
+	var newDirection = $RayCast2D.cast_to.normalized()
+	if newDirection == Vector2.UP:
+		$Sprite.animation = "Up"
+	if newDirection == Vector2.DOWN:
+		$Sprite.animation = "Down"
+	if newDirection == Vector2.LEFT:
+		$Sprite.animation = "Left"
+	if newDirection == Vector2.RIGHT:
+		$Sprite.animation = "Right"
+
 func slide():
 	sliding = true
 	move(lastDirection)
 
 func _on_Tween_tween_completed(object, key):
+		if (!sliding):
+			$Sprite.frame = 0
 		emit_signal("moveDone", position)
+
+
+func _on_Tween_tween_step(object, key, elapsed, value):
+	if (elapsed > 0.3 && !sliding):
+		$Sprite.frame = 0

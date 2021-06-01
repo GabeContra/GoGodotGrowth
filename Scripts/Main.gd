@@ -40,3 +40,13 @@ func _on_Ball_moveDone(pos):
 	var tileIndex = $Floor.get_cellv($Floor.world_to_map(pos))
 	if tileIndex == 0:
 		$Floor/Objects/Ball.slide()
+
+
+func _on_Player_moving(pos, dir):
+	var currentPos = $Floor.world_to_map(pos)
+	var tileIndex = $Floor.get_cellv(currentPos)
+	var nextTileIndex = $Floor.get_cellv(currentPos + dir)
+	if nextTileIndex == 0:
+		$Floor/Objects/Player.sliding = true
+	if nextTileIndex == 1:
+		$Floor/Objects/Player.sliding = false

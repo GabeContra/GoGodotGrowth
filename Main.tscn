@@ -29,8 +29,18 @@ tile_data = PoolIntArray( 327689, 0, 0, 327690, 2, 0, 327693, 1, 0, 327694, 2, 0
 position = Vector2( 400, 336 )
 
 [node name="Ball" parent="Floor/Objects" instance=ExtResource( 4 )]
-position = Vector2( 432, 496 )
+position = Vector2( 496, 272 )
+z_as_relative = false
+scaleLevel = 7
+
+[node name="Ball2" parent="Floor/Objects" instance=ExtResource( 4 )]
+position = Vector2( 464, 304 )
+z_as_relative = false
+scaleLevel = 7
 
 [connection signal="moveDone" from="Floor/Objects/Player" to="." method="_on_Player_moveDone"]
+[connection signal="moving" from="Floor/Objects/Player" to="." method="_on_Player_moving"]
 [connection signal="moveDone" from="Floor/Objects/Ball" to="." method="_on_Ball_moveDone"]
 [connection signal="moving" from="Floor/Objects/Ball" to="." method="_on_Ball_moving"]
+[connection signal="moveDone" from="Floor/Objects/Ball2" to="." method="_on_Ball_moveDone"]
+[connection signal="moving" from="Floor/Objects/Ball2" to="." method="_on_Ball_moving"]
