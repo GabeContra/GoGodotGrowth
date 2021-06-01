@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/IcepuzzleLoop.ogg-075f4ce8816cf49b609b266af4a7f77e.oggstr"
+
+[deps]
+
+source_file="res://Assets/IcepuzzleLoop.ogg"
+dest_files=[ "res://.import/IcepuzzleLoop.ogg-075f4ce8816cf49b609b266af4a7f77e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

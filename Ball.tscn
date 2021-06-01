@@ -13,6 +13,7 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 1 )
+offset = Vector2( 0, -2 )
 region_rect = Rect2( 96, 108, 32, 36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -25,5 +26,9 @@ collision_mask = 2
 collide_with_areas = true
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Particles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 4
 
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
