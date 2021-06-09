@@ -52,7 +52,7 @@ func _on_Player_moving(pos, dir):
 
 
 func _on_Goal_failed():
-	$LossPopup.popup_centered()
+	$UI/LossPopup.popup_centered()
 
 
 func _on_Button_pressed():
@@ -61,7 +61,7 @@ func _on_Button_pressed():
 
 func _on_Goal_wonLevel(next):
 	nextLevel = next
-	$WinPopop.popup_centered()
+	$UI/WinPopop.popup_centered()
 
 
 func _on_WinPopop_confirmed():

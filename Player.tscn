@@ -24,5 +24,9 @@ collide_with_areas = true
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="tween_step" from="Tween" to="." method="_on_Tween_tween_step"]

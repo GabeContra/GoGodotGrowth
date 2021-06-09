@@ -14,7 +14,6 @@
 script = ExtResource( 6 )
 
 [node name="Floor" type="TileMap" parent="."]
-z_index = -20
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 2
@@ -45,19 +44,74 @@ NextLevel = ExtResource( 9 )
 position = Vector2( 592, 336 )
 scaleLevel = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+autoplay = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TooHeavy" type="Popup" parent="UI"]
+anchor_left = 0.3
+anchor_top = 1.0
+anchor_right = 0.7
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="UI/TooHeavy"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Label" type="Label" parent="UI/TooHeavy"]
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "That's a bit too heavy to push."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="UI/TooHeavy"]
+
+[node name="LossPopup" type="AcceptDialog" parent="UI"]
+anchor_left = 0.3
+anchor_top = 0.3
+anchor_right = 0.7
+anchor_bottom = 0.7
+rect_clip_content = true
+popup_exclusive = true
+
+[node name="LossMessage" type="Label" parent="UI/LossPopup"]
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+margin_left = -32.96
+margin_top = -22.72
+margin_right = 32.96
+margin_bottom = -5.28
+text = "You can't put have a big head without a body to support it. Balance is key."
+align = 1
+valign = 1
+autowrap = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
 margin_right = 80.0
 margin_bottom = 20.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="MarginContainer"]
+[node name="Button" type="Button" parent="UI/MarginContainer"]
 margin_right = 80.0
 margin_bottom = 20.0
 text = "Reset"
 
-[node name="WinPopop" type="AcceptDialog" parent="."]
+[node name="WinPopop" type="AcceptDialog" parent="UI"]
 anchor_left = 0.3
 anchor_top = 0.3
 anchor_right = 0.7
@@ -71,7 +125,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WinMessage" type="Label" parent="WinPopop"]
+[node name="WinMessage" type="Label" parent="UI/WinPopop"]
 anchor_left = 0.1
 anchor_top = 0.1
 anchor_right = 0.9
@@ -89,70 +143,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LossPopup" type="AcceptDialog" parent="."]
-anchor_left = 0.3
-anchor_top = 0.3
-anchor_right = 0.7
-anchor_bottom = 0.7
-rect_clip_content = true
-popup_exclusive = true
-
-[node name="LossMessage" type="Label" parent="LossPopup"]
-anchor_left = 0.1
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
-margin_left = -32.96
-margin_top = -22.72
-margin_right = 32.96
-margin_bottom = -5.28
-text = "You can't put have a big head without a body to support it. Balance is key."
-align = 1
-valign = 1
-autowrap = true
-
-[node name="TooHeavy" type="Popup" parent="."]
-anchor_left = 0.3
-anchor_top = 1.0
-anchor_right = 0.7
-anchor_bottom = 1.0
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="TooHeavy"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="Label" type="Label" parent="TooHeavy"]
-anchor_top = 0.1
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "That's a bit too heavy to push."
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Tween" type="Tween" parent="TooHeavy"]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-autoplay = true
-
 [connection signal="moveDone" from="Floor/Objects/Player" to="." method="_on_Player_moveDone"]
 [connection signal="moving" from="Floor/Objects/Player" to="." method="_on_Player_moving"]
 [connection signal="moveDone" from="Floor/Objects/Ball" to="." method="_on_Ball_moveDone"]
 [connection signal="moving" from="Floor/Objects/Ball" to="." method="_on_Ball_moving"]
-[connection signal="tooHeavy" from="Floor/Objects/Ball" to="TooHeavy" method="_on_Ball_tooHeavy"]
+[connection signal="tooHeavy" from="Floor/Objects/Ball" to="UI/TooHeavy" method="_on_Ball_tooHeavy"]
 [connection signal="failed" from="Floor/Objects/Goal" to="." method="_on_Goal_failed"]
 [connection signal="wonLevel" from="Floor/Objects/Goal" to="." method="_on_Goal_wonLevel"]
 [connection signal="moveDone" from="Floor/Objects/Ball2" to="." method="_on_Ball_moveDone"]
 [connection signal="moving" from="Floor/Objects/Ball2" to="." method="_on_Ball_moving"]
-[connection signal="tooHeavy" from="Floor/Objects/Ball2" to="TooHeavy" method="_on_Ball_tooHeavy"]
-[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_Button_pressed"]
-[connection signal="confirmed" from="WinPopop" to="." method="_on_WinPopop_confirmed"]
-[connection signal="confirmed" from="LossPopup" to="." method="_on_LossPopup_confirmed"]
-[connection signal="tween_completed" from="TooHeavy/Tween" to="TooHeavy" method="_on_Tween_tween_completed"]
+[connection signal="tooHeavy" from="Floor/Objects/Ball2" to="UI/TooHeavy" method="_on_Ball_tooHeavy"]
+[connection signal="tween_completed" from="UI/TooHeavy/Tween" to="UI/TooHeavy" method="_on_Tween_tween_completed"]
+[connection signal="confirmed" from="UI/LossPopup" to="." method="_on_LossPopup_confirmed"]
+[connection signal="pressed" from="UI/MarginContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="confirmed" from="UI/WinPopop" to="." method="_on_WinPopop_confirmed"]
