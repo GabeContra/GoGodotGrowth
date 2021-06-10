@@ -33,20 +33,21 @@ tile_data = PoolIntArray( 393225, 4, 0, 393226, 0, 196609, 393227, 0, 196610, 39
 [node name="Player" parent="Floor/Objects/Level1" instance=ExtResource( 2 )]
 position = Vector2( 336, 400 )
 
-[node name="ballHolder" type="YSort" parent="Floor/Objects/Level1"]
-
-[node name="Ball2" parent="Floor/Objects/Level1/ballHolder" instance=ExtResource( 4 )]
-position = Vector2( 592, 336 )
-scaleLevel = 5
-
-[node name="Ball" parent="Floor/Objects/Level1/ballHolder" instance=ExtResource( 4 )]
-position = Vector2( 368, 400 )
-scaleLevel = 4
-
 [node name="Goal" parent="Floor/Objects/Level1" instance=ExtResource( 5 )]
 position = Vector2( 576, 383.6 )
 numOfBalls = 2
 NextLevel = ExtResource( 9 )
+
+[node name="ballHolder" type="YSort" parent="Floor/Objects/Level1/Goal"]
+position = Vector2( -576, -383.6 )
+
+[node name="Ball2" parent="Floor/Objects/Level1/Goal/ballHolder" instance=ExtResource( 4 )]
+position = Vector2( 592, 336 )
+scaleLevel = 5
+
+[node name="Ball" parent="Floor/Objects/Level1/Goal/ballHolder" instance=ExtResource( 4 )]
+position = Vector2( 368, 400 )
+scaleLevel = 4
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
@@ -149,14 +150,14 @@ __meta__ = {
 
 [connection signal="moveDone" from="Floor/Objects/Level1/Player" to="." method="_on_Player_moveDone"]
 [connection signal="moving" from="Floor/Objects/Level1/Player" to="." method="_on_Player_moving"]
-[connection signal="moveDone" from="Floor/Objects/Level1/ballHolder/Ball2" to="." method="_on_Ball_moveDone"]
-[connection signal="moving" from="Floor/Objects/Level1/ballHolder/Ball2" to="." method="_on_Ball_moving"]
-[connection signal="tooHeavy" from="Floor/Objects/Level1/ballHolder/Ball2" to="UI/TooHeavy" method="_on_Ball_tooHeavy"]
-[connection signal="moveDone" from="Floor/Objects/Level1/ballHolder/Ball" to="." method="_on_Ball_moveDone"]
-[connection signal="moving" from="Floor/Objects/Level1/ballHolder/Ball" to="." method="_on_Ball_moving"]
-[connection signal="tooHeavy" from="Floor/Objects/Level1/ballHolder/Ball" to="UI/TooHeavy" method="_on_Ball_tooHeavy"]
 [connection signal="failed" from="Floor/Objects/Level1/Goal" to="." method="_on_Goal_failed"]
 [connection signal="wonLevel" from="Floor/Objects/Level1/Goal" to="." method="_on_Goal_wonLevel"]
+[connection signal="moveDone" from="Floor/Objects/Level1/Goal/ballHolder/Ball2" to="." method="_on_Ball_moveDone"]
+[connection signal="moving" from="Floor/Objects/Level1/Goal/ballHolder/Ball2" to="." method="_on_Ball_moving"]
+[connection signal="tooHeavy" from="Floor/Objects/Level1/Goal/ballHolder/Ball2" to="UI/TooHeavy" method="_on_Ball_tooHeavy"]
+[connection signal="moveDone" from="Floor/Objects/Level1/Goal/ballHolder/Ball" to="." method="_on_Ball_moveDone"]
+[connection signal="moving" from="Floor/Objects/Level1/Goal/ballHolder/Ball" to="." method="_on_Ball_moving"]
+[connection signal="tooHeavy" from="Floor/Objects/Level1/Goal/ballHolder/Ball" to="UI/TooHeavy" method="_on_Ball_tooHeavy"]
 [connection signal="tween_completed" from="UI/TooHeavy/Tween" to="UI/TooHeavy" method="_on_Tween_tween_completed"]
 [connection signal="confirmed" from="UI/LossPopup" to="." method="_on_LossPopup_confirmed"]
 [connection signal="pressed" from="UI/MarginContainer/Button" to="." method="_on_Button_pressed"]
