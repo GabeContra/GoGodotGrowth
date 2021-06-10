@@ -4,7 +4,7 @@ class_name Goal
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export(int) var numOfBalls = 1
+var numOfBalls = 1
 export(PackedScene) var NextLevel
 signal failed
 signal wonLevel(next)
@@ -20,6 +20,9 @@ func _ready():
 	nextBallPos.y += 16
 	nextBallPos += $Sprite.offset
 	initPosition = nextBallPos
+	if self.has_node("ballHolder"):
+		var holder = self.get_node("ballHolder")
+		numOfBalls = holder.get_child_count()
 
 func addBall(ball):
 	if Balls.size() > 0:
