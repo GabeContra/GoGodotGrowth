@@ -8,6 +8,7 @@ var nextLevel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Floor/Objects/Level1/Player/Camera2D.current = true
 	pass # Replace with function body.
 
 
@@ -16,13 +17,13 @@ func _ready():
 #	pass
 
 
-func _on_Player_moveDone(pos):
+func _on_Player_moveDone(pos, obj):
 	var tileIndex = $Floor.get_cellv($Floor.world_to_map(pos))
 	if tileIndex == 0:
-		$Floor/Objects/Player.slide()
+		obj.slide()
 		return
 	else:
-		$Floor/Objects/Player.keepControl()
+		obj.keepControl()
 		return
 
 
@@ -41,14 +42,14 @@ func _on_Ball_moveDone(obj, pos):
 		obj.slide()
 
 
-func _on_Player_moving(pos, dir):
+func _on_Player_moving(pos, dir, obj):
 	var currentPos = $Floor.world_to_map(pos)
 	var tileIndex = $Floor.get_cellv(currentPos)
 	var nextTileIndex = $Floor.get_cellv(currentPos + dir)
 	if nextTileIndex == 0:
-		$Floor/Objects/Player.sliding = true
+		obj.sliding = true
 	if nextTileIndex == 1:
-		$Floor/Objects/Player.sliding = false
+		obj.sliding = false
 
 
 func _on_Goal_failed():

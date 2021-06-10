@@ -4,8 +4,8 @@ extends Area2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-signal moveDone(pos)
-signal moving(pos, dir)
+signal moveDone(pos, obj)
+signal moving(pos, dir, obj)
 var lastDirection
 var sliding = false
 var leftFootForward = true
@@ -40,7 +40,7 @@ func move(direction):
 	$RayCast2D.force_raycast_update()
 	updateAnimDirection()
 	if !$RayCast2D.is_colliding():
-		emit_signal("moving", position, direction)
+		emit_signal("moving", position, direction, self)
 		$Tween.interpolate_property(self, "position", position, position + direction * tile_size, 0.4, Tween.TRANS_LINEAR)
 		$Tween.start()
 		$Sprite.frame = 1 + int(leftFootForward)
@@ -94,7 +94,7 @@ func slide():
 func _on_Tween_tween_completed(object, key):
 		if (!sliding):
 			$Sprite.frame = 0
-		emit_signal("moveDone", position)
+		emit_signal("moveDone", position, self)
 
 
 func _on_Tween_tween_step(object, key, elapsed, value):
