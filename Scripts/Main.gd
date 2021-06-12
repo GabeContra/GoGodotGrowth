@@ -19,7 +19,7 @@ func _ready():
 
 func _on_Player_moveDone(pos, obj):
 	var tileIndex = $Floor.get_cellv($Floor.world_to_map(pos))
-	if tileIndex == 0:
+	if tileIndex == 2:
 		obj.slide()
 		return
 	else:
@@ -31,14 +31,14 @@ func _on_Ball_moving(obj, pos, dir):
 	var currentPos = $Floor.world_to_map(pos)
 	var tileIndex = $Floor.get_cellv(currentPos)
 	var nextTileIndex = $Floor.get_cellv(currentPos + dir)
-	if tileIndex == 1 and nextTileIndex == 1:
+	if tileIndex == 3 and nextTileIndex == 3:
 		obj.scaleLevel += 1
 		
 
 
 func _on_Ball_moveDone(obj, pos):
 	var tileIndex = $Floor.get_cellv($Floor.world_to_map(pos))
-	if tileIndex == 0:
+	if tileIndex == 2:
 		obj.slide()
 
 
@@ -46,9 +46,9 @@ func _on_Player_moving(pos, dir, obj):
 	var currentPos = $Floor.world_to_map(pos)
 	var tileIndex = $Floor.get_cellv(currentPos)
 	var nextTileIndex = $Floor.get_cellv(currentPos + dir)
-	if nextTileIndex == 0:
+	if nextTileIndex == 2:
 		obj.sliding = true
-	if nextTileIndex == 1:
+	if nextTileIndex == 3:
 		obj.sliding = false
 
 
